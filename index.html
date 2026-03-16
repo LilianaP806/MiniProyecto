@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Lily's Bakery</title>
+<link rel="icon" type="logo/png" sizes="32x32" href="logo.png">
+<style>
+
+body{
+    margin:0;
+    font-family:Fredoka, sans-serif;
+    background:#e6e6e6;
+}
+
+
+
+.container{
+    display:flex;
+    height:100vh;
+}
+
+
+
+.izquierda{
+    width:60%;
+    background:#ffe0d9;
+    text-align:center;
+    padding:40px;
+}
+
+.logo{
+    font-size:32px;
+    margin-bottom:20px;
+}
+
+.logo span{
+    font-size:14px;
+    display:block;
+    color:#666;
+}
+
+.imagen-presentación{
+    width:85%;
+    border-radius:10px;
+    box-shadow:0px 0px 10px rgba(0,0,0,0.3);
+}
+
+
+
+.derecha{
+    width:40%;
+    background:#fafab6;
+    padding:40px;
+}
+
+h2{
+    text-align:center;
+    color:#f5b81d;
+}
+
+.precio{
+    text-align:center;
+    font-size:22px;
+    color:#d17786;
+    margin-bottom:20px;
+}
+
+form{
+    display:flex;
+    flex-direction:column;
+    color: #d4687a;
+}
+
+label{
+    margin-top:15px;
+    font-weight:bold;
+}
+
+input, select{
+    padding:8px;
+    margin-top:5px;
+}
+
+button{
+    margin-top:20px;
+    padding:10px;
+    background:#d4687a;
+    color:white;
+    border:none;
+    cursor:pointer;
+}
+
+button:hover{
+    background:#f5ec87;
+    color:#d4687a;
+
+}
+
+.cupcakes{
+display:flex;
+justify-content:center;
+gap:15px;
+margin:20px 0;
+}
+
+.pastelito{
+text-align:center;
+}
+
+.pastelito img{
+width:100px;
+height:70px;
+object-fit:cover;
+border-radius:8px;
+box-shadow:0px 2px 6px rgba(0,0,0,0.3);
+transition:0.3s;
+cursor:pointer;
+}
+
+.pastelito img:hover{
+transform:scale(1.1);
+}
+
+.pastelito p{
+margin-top:5px;
+font-size:14px;
+font-weight:bold;
+color: #b34242;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+
+
+<div class="izquierda">
+
+<img class="imagen-presentación" src="postre.png" alt="Presentación">
+
+</div>
+
+
+
+<div class="derecha">
+
+<h2>REALIZA TU PEDIDO</h2>
+
+<div class="precio">
+Todos los CupCakes a $25.00
+</div>
+
+<p></p>
+<div class="cupcakes">
+
+<div class="pastelito">
+<img src="capuchino.jpg" alt="capuchino">
+<p>Capuchino</p>
+</div>
+
+<div class="pastelito">
+<img src="velvet.jpeg" alt="redvelvet">
+<p>Red Velvet</p>
+</div>
+
+<div class="pastelito">
+<img src="zanahoria.jpg" alt="Zanahoria">
+<p>Zanahoria</p>
+</div>
+
+</div>
+<p></p>
+<form id="formulario">
+
+<label>Cupcake</label>
+
+<select id="cupcake">
+<option>Capuchino</option>
+<option>Red Velvet</option>
+<option>Zanahoria</option>
+</select>
+
+<label>Nombre</label>
+<input type="text" placeholder="Nombre" id="nombre" required>
+
+<label>Dirección</label>
+<input type="text" placeholder="Dirección" id="direccion" required>
+
+<label>Teléfono</label>
+<input type="text" placeholder="Teléfono" id="telefono" required>
+
+<button type="submit">Enviar Pedido</button>
+</form>
+
+</div>
+
+</div>
+
+<script>
+
+const url = "https://script.google.com/macros/s/AKfycbxCaCGMWc0nJ03D6ATPHJhP-DDOcS4I3i-w9ZA4IY0tA1AqcddlP97h5qZD3-I0es4UBw/exec";
+
+document.getElementById("formulario").addEventListener("submit", function(e){
+
+e.preventDefault();
+
+const datos = {
+cupcake: document.getElementById("cupcake").value,
+nombre: document.getElementById("nombre").value,
+direccion: document.getElementById("direccion").value,
+telefono: document.getElementById("telefono").value
+};
+
+fetch(url,{
+method:"POST",
+body: JSON.stringify(datos)
+})
+.then(res => res.text())
+.then(data=>{
+alert("Pedido enviado correctamente");
+document.getElementById("formulario").reset();
+})
+.catch(error=>{
+alert("Error al enviar pedido");
+console.error(error);
+});
+
+});
+    </script>
+</body>
+</html>
